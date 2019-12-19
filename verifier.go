@@ -58,8 +58,10 @@ func (v Verifier) Middleware(next http.Handler) http.Handler {
 		accessJWT := r.Header.Get("Cf-Access-Jwt-Assertion")
 
 		if len(accessJWT) < 1 {
-			c, _ := r.Cookie("CF_Authorization")
-			accessJWT = c.Value
+			c, err := r.Cookie("CF_Authorization")
+			if err == nil {
+				accessJWT = c.Value
+			}
 		}
 
 		if len(accessJWT) < 1 {
@@ -87,8 +89,10 @@ func (v Verifier) HandlerMiddleware(w http.ResponseWriter, r *http.Request) bool
 	accessJWT := r.Header.Get("Cf-Access-Jwt-Assertion")
 
 	if len(accessJWT) < 1 {
-		c, _ := r.Cookie("CF_Authorization")
-		accessJWT = c.Value
+		c, err := r.Cookie("CF_Authorization")
+		if err == nil {
+			accessJWT = c.Value
+		}
 	}
 
 	if len(accessJWT) < 1 {
