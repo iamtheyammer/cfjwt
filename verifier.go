@@ -1,4 +1,4 @@
-package main
+package cfjwt
 
 import (
 	"context"
@@ -9,16 +9,16 @@ import (
 )
 
 type Verifier struct {
-	PolicyAUD string
+	PolicyAUD  string
 	AuthDomain string
-	ctx context.Context
+	ctx        context.Context
 }
 
 var (
 	ctx        = context.TODO()
 	authDomain = ""
 
-	config = &oidc.Config{}
+	config   = &oidc.Config{}
 	keySet   = oidc.NewRemoteKeySet(ctx, "")
 	verifier = oidc.NewVerifier(authDomain, keySet, config)
 )
