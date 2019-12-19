@@ -1,4 +1,4 @@
-module cfjwt
+module github.com/iamtheyammer/cfjwt
 
 go 1.13
 
